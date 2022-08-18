@@ -1,0 +1,91 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <style type="text/css">
+  .markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+  }
+  .markdown-body pre {
+    background: #23241f;
+  }
+  .markdown-body strong,
+  .markdown-body h1,
+  .markdown-body h2,
+  .markdown-body h3,
+  .markdown-body h4,
+  .markdown-body h5 {
+    font-weight: 700;
+  }
+  .markdown-body code, .markdown-body pre {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+    font-size: 12px;
+  }
+  .highlight pre, .markdown-body pre {
+    border-radius: 3px;
+    font-size: 85%;
+    line-height: 1.45;
+    overflow: auto;
+    padding: 16px;
+  }
+  .hljs, .hljs-tag, .hljs-subst {
+    color: #f8f8f2;
+  }
+  .hljs-code, .hljs-title, .hljs-section, .hljs-selector-class {
+    color: #a6e22e;
+  }
+  .markdown-body pre {
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+  }
+  .markdown-body pre>code {
+    background: 0 0;
+    font-size: 100%;
+    white-space: pre;
+    word-break: normal;
+  }
+  .markdown-body code {
+    background-color: rgba(27,31,35,.05);
+    border-radius: 3px;
+    font-size: 85%;
+    margin: 0;
+    padding: .2em .4em;
+  }
+  @media (max-width: 767px) {
+    .markdown-body {
+      padding: 15px;
+    }
+  }</style><script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><title>AI ４並べゲーム 遊び方</title></head><body><div class="markdown-body"><h1 id="AI_４並べゲーム_遊び方" onmouseover="this.querySelector('a .fa-link').style.display='inline-block'" onmouseout="this.querySelector('a .fa-link').style.display='none'">AI ４並べゲーム 遊び方<a href="#AI_４並べゲーム_遊び方" title="AI_４並べゲーム_遊び方"><i class="fas fa-link ml-1" style="display:none;"></i></a></h1>
+
+<h2 id="ゲームのルール" onmouseover="this.querySelector('a .fa-link').style.display='inline-block'" onmouseout="this.querySelector('a .fa-link').style.display='none'">ゲームのルール<a href="#ゲームのルール" title="ゲームのルール"><i class="fas fa-link ml-1" style="display:none;"></i></a></h2>
+<p>縦6列 x 横7行のマスの盤面で、2人交互に選んだ列にコインを落としていき<br>先に縦、横、斜めのどれかで自分のコインを4つ並べたプレイヤーが勝利です。</p>
+<h2 id="AIプログラムのルール" onmouseover="this.querySelector('a .fa-link').style.display='inline-block'" onmouseout="this.querySelector('a .fa-link').style.display='none'">AIプログラムのルール<a href="#AIプログラムのルール" title="AIプログラムのルール"><i class="fas fa-link ml-1" style="display:none;"></i></a></h2>
+<p>プログラムを実行後、標準入力から盤面の状態を受け取り<br>標準出力にコインを落とす列を指定するプログラムを作成します。</p>
+<p>言語は問いませんが、プログラムが動作するWindows端末を準備する必要があります。<br>事前に、クライアントアプリからテスト実行を行い、正しく動作することを確認してください。</p>
+<h2 id="AIプログラムの仕様" onmouseover="this.querySelector('a .fa-link').style.display='inline-block'" onmouseout="this.querySelector('a .fa-link').style.display='none'">AIプログラムの仕様<a href="#AIプログラムの仕様" title="AIプログラムの仕様"><i class="fas fa-link ml-1" style="display:none;"></i></a></h2>
+<h3 id="標準入力" onmouseover="this.querySelector('a .fa-link').style.display='inline-block'" onmouseout="this.querySelector('a .fa-link').style.display='none'">標準入力<a href="#標準入力" title="標準入力"><i class="fas fa-link ml-1" style="display:none;"></i></a></h3>
+<p>AIプログラムを実行後、以下のような標準入力を与えます。</p>
+<pre><code>7 6 0
+.......
+.......
+....0..
+....1..
+...11..
+.0100..</code></pre><p>1行目には、列数、行数、自分の記号をスペース区切りで表します。<br>2行目以降はマスごとに1文字ずつ表します。<br><code>.</code> は空のマス、1行目の自分の記号と同じ文字は、自分のコイン、<br>それ以外の文字はほかのプレイヤーのコインがそのマスにある状態を表します。<br>行の最後は <code>\n</code> で区切られ、最後の行にも末尾に <code>\n</code> が入ります。</p>
+<h3 id="標準出力" onmouseover="this.querySelector('a .fa-link').style.display='inline-block'" onmouseout="this.querySelector('a .fa-link').style.display='none'">標準出力<a href="#標準出力" title="標準出力"><i class="fas fa-link ml-1" style="display:none;"></i></a></h3>
+<p>標準入力を受け取ったのち、次のターンに自分のコインを落とす列番号を標準出力に書きます。<br>一番左の列を <code>0</code> とし、標準出力の最初の数字で表された番号未満の値を出力する必要があります。<br>それ以外の文字を標準出力に出力された場合、エラーとなり失格になります。</p>
+<p>ただし、列番号の後に改行コードをつけることは許容されます。</p>
+<h2 id="クライアントアプリの使い方" onmouseover="this.querySelector('a .fa-link').style.display='inline-block'" onmouseout="this.querySelector('a .fa-link').style.display='none'">クライアントアプリの使い方<a href="#クライアントアプリの使い方" title="クライアントアプリの使い方"><i class="fas fa-link ml-1" style="display:none;"></i></a></h2>
+<h3 id="テスト実行" onmouseover="this.querySelector('a .fa-link').style.display='inline-block'" onmouseout="this.querySelector('a .fa-link').style.display='none'">テスト実行<a href="#テスト実行" title="テスト実行"><i class="fas fa-link ml-1" style="display:none;"></i></a></h3>
+<p>標準入力を自由に指定して、AIプログラムが正しく動くか確認することができます。<br><code>Command</code> 欄にAIプログラム実行のコマンドを入力し、<br><code>Input</code> 欄に標準入力を指定して テスト実行 ボタンを押します。<br>カレントの変更が必要な場合は、Current Dir 欄にパスを指定することができます。</p>
+<h3 id="本番実行" onmouseover="this.querySelector('a .fa-link').style.display='inline-block'" onmouseout="this.querySelector('a .fa-link').style.display='none'">本番実行<a href="#本番実行" title="本番実行"><i class="fas fa-link ml-1" style="display:none;"></i></a></h3>
+<p>事前にテスト実行にて、Command の指定が問題ないことを確認しておきます。<br>ドロップダウンから参加する部屋を選択し、自分のユーザ名（任意の名前）を<br><code>User Name</code> に入力して <code>Login</code> ボタンを押します。<br>選択した部屋にプレイヤーが2人揃ったら、自動でAIプログラムが実行され、ゲームが進行します。<br>ゲーム中の推移は <code>ブラウザで開く</code> ボタンを押してブラウザ上で確認できます。</p>
+</div></body><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script><script type="text/javascript">hljs.initHighlightingOnLoad();</script><script>
+  $(document).on("mouseover", "h1,h2,h3,h4,h5", function(e) {
+    $(e.currentTarget).find(".fa-link").text("🔗").show();
+  });
+  $(document).on("mouseout", "h1,h2,h3,h4,h5", function(e) {
+    $(e.currentTarget).find(".fa-link").hide();
+  });</script></html>

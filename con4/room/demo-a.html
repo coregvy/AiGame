@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+  <title>game</title>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+</head>
+<body>
+  <main>
+    <div id="game">
+      <div class="base"></div>
+      <div class="manual-select">
+        <div class="coinpos c0"><br />0</div><div class="coinpos c1"><br />1</div><div class="coinpos c2"><br />2</div><div class="coinpos c3"><br />3</div><div class="coinpos c4"><br />4</div><div class="coinpos c5"><br />5</div><div class="coinpos c6"><br />6</div>
+      </div>
+      <div class="coinrails">
+        <div class="rail c0">
+          <div class="coinpos r0"></div><div class="coinpos r1"></div><div class="coinpos r2"></div><div class="coinpos r3"></div><div class="coinpos r4"></div><div class="coinpos r5"></div>
+        </div>
+        <div class="rail c1">
+          <div class="coinpos r0"></div><div class="coinpos r1"></div><div class="coinpos r2"></div><div class="coinpos r3"></div><div class="coinpos r4"></div><div class="coinpos r5"></div>
+        </div>
+        <div class="rail c2">
+          <div class="coinpos r0"></div><div class="coinpos r1"></div><div class="coinpos r2"></div><div class="coinpos r3"></div><div class="coinpos r4"></div><div class="coinpos r5"></div>
+        </div>
+        <div class="rail c3">
+          <div class="coinpos r0"></div><div class="coinpos r1"></div><div class="coinpos r2"></div><div class="coinpos r3"></div><div class="coinpos r4"></div><div class="coinpos r5"></div>
+        </div>
+        <div class="rail c4">
+          <div class="coinpos r0"></div><div class="coinpos r1"></div><div class="coinpos r2"></div><div class="coinpos r3"></div><div class="coinpos r4"></div><div class="coinpos r5"></div>
+        </div>
+        <div class="rail c5">
+          <div class="coinpos r0"></div><div class="coinpos r1"></div><div class="coinpos r2"></div><div class="coinpos r3"></div><div class="coinpos r4"></div><div class="coinpos r5"></div>
+        </div>
+        <div class="rail c6">
+          <div class="coinpos r0"></div><div class="coinpos r1"></div><div class="coinpos r2"></div><div class="coinpos r3"></div><div class="coinpos r4"></div><div class="coinpos r5"></div>
+        </div>
+      </div>
+    </div>
+    <div id="debug">
+      <div id="cardinfo">
+        <div id="room-label"></div>
+        <hr style="margin-right: 50px;"/>
+        <span id="user0" style="background: linear-gradient(transparent 70%, red 0%);">
+          <button id="user0_login">login</button> <span class="name">参加待ち</span><input class="name-edit" size="12" />
+        </span>
+        <span style="text-align: center; width: 100%;font-size: larger; font-weight: bold; font-style: italic;">VS</span>
+        <span id="user1" style="text-align: right; background: linear-gradient(transparent 70%, yellow 0%); left: 100px;">
+          <span class="name">参加待ち</span><input class="name-edit" size="12" /> <button id="user1_login">login</button>
+        </span>
+      </div>
+      <hr style="margin-right: 50px;" />
+      <div id="ctrl">
+        <button id="game-end">ゲーム終了</button>
+      </div>
+      <hr style="margin-right: 50px;" />
+      <label>stdin
+        <span title="1行目は '列数 行数 ユーザ番号'&#10;2行目以降は各マスごとの状態を出力する&#10;最後の行の末尾にも改行がつく">
+          <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2M12.19,5.5C11.3,5.5 10.59,5.68 10.05,6.04C9.5,6.4 9.22,7 9.27,7.69H11.24C11.24,7.41 11.34,7.2 11.5,7.06C11.7,6.92 11.92,6.85 12.19,6.85C12.5,6.85 12.77,6.93 12.95,7.11C13.13,7.28 13.22,7.5 13.22,7.8C13.22,8.08 13.14,8.33 13,8.54C12.83,8.76 12.62,8.94 12.36,9.08C11.84,9.4 11.5,9.68 11.29,9.92C11.1,10.16 11,10.5 11,11H13C13,10.72 13.05,10.5 13.14,10.32C13.23,10.15 13.4,10 13.66,9.85C14.12,9.64 14.5,9.36 14.79,9C15.08,8.63 15.23,8.24 15.23,7.8C15.23,7.1 14.96,6.54 14.42,6.12C13.88,5.71 13.13,5.5 12.19,5.5M11,12V14H13V12H11Z" />
+          </svg>
+        </span>
+        <span style="cursor: pointer;" title="クリップボードにコピー" onclick="DebugCtrl.stdinCopy();">
+          <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+          </svg>
+        </span>
+        <textarea id="stdin" rows="10" cols="30" readonly></textarea>
+      </label>
+      <label>stdout
+        <span title="コインを落とす列番号を左から0からの数字で出力する">
+          <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2M12.19,5.5C11.3,5.5 10.59,5.68 10.05,6.04C9.5,6.4 9.22,7 9.27,7.69H11.24C11.24,7.41 11.34,7.2 11.5,7.06C11.7,6.92 11.92,6.85 12.19,6.85C12.5,6.85 12.77,6.93 12.95,7.11C13.13,7.28 13.22,7.5 13.22,7.8C13.22,8.08 13.14,8.33 13,8.54C12.83,8.76 12.62,8.94 12.36,9.08C11.84,9.4 11.5,9.68 11.29,9.92C11.1,10.16 11,10.5 11,11H13C13,10.72 13.05,10.5 13.14,10.32C13.23,10.15 13.4,10 13.66,9.85C14.12,9.64 14.5,9.36 14.79,9C15.08,8.63 15.23,8.24 15.23,7.8C15.23,7.1 14.96,6.54 14.42,6.12C13.88,5.71 13.13,5.5 12.19,5.5M11,12V14H13V12H11Z" />
+          </svg>
+        </span>
+        <textarea id="stdout" rows="10" cols="30" readonly></textarea>
+      </label>
+      <label>message
+        <textarea id="wsmessage" rows="10" cols="30" readonly></textarea>
+      </label>
+      <hr style="margin-right: 50px;" />
+      <a href="client.zip">クライアントアプリのダウンロード</a><br />
+      <a href="help.html">クライアントアプリの使い方</a>
+      <hr style="margin-right: 50px;" />
+    </div>
+    <canvas id="canvas" style="top: 0; position: fixed; left: 0; display: none; z-index: 1000; pointer-events: none;"></canvas>
+  </main>
+  <div id="dialog-form" title="Create new user" style="display: none;">
+    <form>
+      <fieldset id="ctrl-type-select">
+        <legend>type</legend>
+        <label for="ctrl-type-ai-client">AI Client</label>
+        <input type="radio" name="ctrl-type" id="ctrl-type-ai-client" data-open="ctrl-sel-ai-client" />
+        <label for="ctrl-type-ai-demo">AI Demo</label>
+        <input type="radio" name="ctrl-type" id="ctrl-type-ai-demo" data-open="ctrl-sel-ai-demo" />
+        <label for="ctrl-type-player">Player</label>
+        <input type="radio" name="ctrl-type" id="ctrl-type-player" data-open="ctrl-sel-ai-player" />
+      </fieldset>
+      <fieldset id="ctrl-sel-ai-client" class="ctrl-sub-select" style="display: none;">
+        <p>クライアントアプリから接続してください</p>
+      </fieldset>
+      <fieldset id="ctrl-sel-ai-demo" class="ctrl-sub-select" style="display: none;">
+        <legend>player select</legend>
+      </fieldset>
+      <fieldset id="ctrl-sel-ai-player" class="ctrl-sub-select" style="display: none;">
+        <label for="player-name">名前</label>
+        <input type="text" name="demo-type" id="player-name" class="text ui-widget-content ui-corner-all" />
+      </fieldset>
+    </form>
+  </div>
+  <div id="dialog-confirm" title="Message" style="display: none;">
+    <p></p>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
+  <script src="js/demo-ai.js"></script>
+  <script src="js/socket.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+  <script>
+    // ページごとにRoom名を変えること
+    // const socket = new SocketManage(document.location.pathname.match(/\/([^\.]*).html$/)[1]);
+    const socket = new SocketManage('demo-a', `ws://localhost:8001/api/con4/demo-a`);
+    const gameManage = new GameManage(socket);
+    const player = new PlayerCtrl(gameManage);
+    const debugCtrl = new DebugCtrl(player);
+
+    // 練習用ページならfalseを指定すること
+    debugCtrl.init(false);
+    socket.onReload.push(function(data) { player.wsOnReload(data); });
+    socket.onStep.push(function(data) { player.wsOnStep(data); });
+  </script>
+</body>
+</html>
